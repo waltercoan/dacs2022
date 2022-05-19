@@ -29,10 +29,18 @@ public class Consulta {
     @JoinColumn(name = "Consulta_ID")
     private List<ProcedimentoRealizado> listaProcedimentos
         = new ArrayList<>();
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    private Medico medicoResponsavel;
 
     
     public List<ProcedimentoRealizado> getListaProcedimentos() {
         return listaProcedimentos;
+    }
+    public Medico getMedicoResponsavel() {
+        return medicoResponsavel;
+    }
+    public void setMedicoResponsavel(Medico medicoResponsavel) {
+        this.medicoResponsavel = medicoResponsavel;
     }
     public void setListaProcedimentos(List<ProcedimentoRealizado> listaProcedimentos) {
         this.listaProcedimentos = listaProcedimentos;
