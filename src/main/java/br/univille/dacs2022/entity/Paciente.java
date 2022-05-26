@@ -1,5 +1,7 @@
 package br.univille.dacs2022.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,9 +17,16 @@ public class Paciente {
     @Column(length = 500)
     private String nome;
     private String sexo;
+    private Date dataNascimento;
 
     public long getId() {
         return id;
+    }
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
     public void setId(long id) {
         this.id = id;
