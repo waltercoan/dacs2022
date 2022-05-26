@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 //POJO - Plain Old Java Object
 @Entity
@@ -17,6 +19,7 @@ public class Paciente {
     @Column(length = 500)
     private String nome;
     private String sexo;
+    @Temporal(value = TemporalType.DATE)
     private Date dataNascimento;
 
     public long getId() {
