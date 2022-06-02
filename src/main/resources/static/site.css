@@ -4,3 +4,8 @@ body {
 .text-center {
     text-align: center;
 }
+
+.botao-direita{
+    display: flex;
+    justify-content: flex-end;
+}
