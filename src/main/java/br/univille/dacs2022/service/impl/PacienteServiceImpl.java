@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.univille.dacs2022.dto.PacienteDTO;
+import br.univille.dacs2022.entity.Paciente;
 import br.univille.dacs2022.mapper.PacienteMapper;
 import br.univille.dacs2022.repository.PacienteRepository;
 import br.univille.dacs2022.service.PacienteService;
@@ -25,6 +26,14 @@ public class PacienteServiceImpl
     @Override
     public List<PacienteDTO> getAll() {
         return mapper.mapListPaciente(repository.findAll());
+    }
+
+
+    @Override
+    public PacienteDTO save(PacienteDTO paciente) {
+        Paciente pacienteEntity = mapper.mapPacienteDTO(paciente);
+        pacienteEntity = repository.save(pacienteEntity);
+        return mapper.mapPaciente(pacienteEntity);
     }
     
 }

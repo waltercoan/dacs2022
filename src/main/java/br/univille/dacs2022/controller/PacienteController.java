@@ -38,7 +38,7 @@ public class PacienteController {
     
     @PostMapping(params="form")
     public ModelAndView save(PacienteDTO paciente){
-        System.out.println(paciente.getNome());
+        service.save(paciente);
         return new ModelAndView("redirect:/paciente");
     }
 }
