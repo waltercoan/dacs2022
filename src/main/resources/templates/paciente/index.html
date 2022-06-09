@@ -29,7 +29,14 @@
                         <td th:text="${paciente.nome}"></td>
                         <td th:text="${paciente.sexo}"></td>
                         <td th:text="${paciente.dataNascimento}"></td>
-                        <td></td>
+                        <td>
+                            <a th:href="@{'/paciente/alterar/'+${paciente.id}}"
+                            class="btn btn-primary">Alterar</a>
+                            
+                            <button class="btn btn-danger js-delete" 
+                                    th:data-id="${paciente.id}" >Excluir</button>
+
+                        </td>
                     </tr>
                 </tbody>
             </table>
