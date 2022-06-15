@@ -13,7 +13,7 @@
             <div class="botao-direita">
                 <a th:href="@{/paciente/novo}" class="btn btn-primary">Novo</a>
             </div>
-            <table class="table">
+            <table class="table" id="pacientes">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -44,5 +44,25 @@
         </div>
         
         <div th:include="layout :: footer">(footer)</div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#pacientes").on('click','.js-delete', function(){
+                    let button = $(this);
+                    bootbox.confirm("Confirma a exclusão \
+                        do registro?",function(result){
+                            if(result){
+                                $.ajax({
+                                    url: '/paciente/delete/' + button.attr('data-id'),
+                                    method: 'GET',
+                                    success : function(){
+                                        window.location.href = '/paciente/';
+                                    }
+                                });
+
+                            }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
