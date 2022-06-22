@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,7 +22,15 @@ public class Paciente {
     private String sexo;
     @Temporal(value = TemporalType.DATE)
     private Date dataNascimento;
+    @ManyToOne
+    private Cidade cidade;
 
+    public Cidade getCidade() {
+        return cidade;
+    }
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
     public long getId() {
         return id;
     }

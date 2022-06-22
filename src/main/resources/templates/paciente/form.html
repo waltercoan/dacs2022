@@ -20,6 +20,7 @@
                             <input class="form-control" 
                                 th:field="*{nome}" 
                                 type="text" id="txtnome">
+                            <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="alert alert-danger"/>
                         </div>
                     </div>
                     <div class="row">
@@ -29,6 +30,7 @@
                                 th:field="*{sexo}" 
                                 placeholder="Masculino/Feminino"
                                 type="text" id="txtsexo">
+                            <p th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}" class="alert alert-danger"/>
                         </div>
                     </div>
                     <div class="row">
@@ -37,6 +39,16 @@
                             <input class="form-control"
                                 th:field="*{dataNascimento}"  
                                 type="date" id="txtdatanascimento">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="listCidades">Cidades:</label>
+                            <select th:field="*{cidade}" class="form-control">
+                                <option th:each="cidade : ${listaCidades}" 
+                                    th:value="${cidade.id}"
+                                    th:text="${cidade.nome}"></option>
+                            </select>
                         </div>
                     </div>
                 </div>

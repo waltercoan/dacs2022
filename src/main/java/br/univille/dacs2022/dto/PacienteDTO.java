@@ -4,13 +4,30 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.univille.dacs2022.entity.Cidade;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class PacienteDTO {
     private long id;
+    @NotBlank(message = "Campo de nome do paciente não pode ser deixado em branco")
+    @NotNull
     private String nome;
+    @Pattern(regexp = "Masculino|Feminino", flags = Pattern.Flag.CASE_INSENSITIVE, 
+        message = "Valor inválido, utilize Masculino ou Feminino")
     private String sexo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
+    private Cidade cidade;
     
+    public Cidade getCidade() {
+        return cidade;
+    }
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
     public long getId() {
         return id;
     }
