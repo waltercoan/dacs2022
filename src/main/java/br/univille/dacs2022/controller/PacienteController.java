@@ -1,5 +1,6 @@
 package br.univille.dacs2022.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.univille.dacs2022.dto.PacienteDTO;
+import br.univille.dacs2022.service.CidadeService;
 import br.univille.dacs2022.service.PacienteService;
 
 @Controller
@@ -23,6 +25,8 @@ public class PacienteController {
 
     @Autowired
     private PacienteService service;
+    @Autowired
+    private CidadeService cidadeService;
 
     @GetMapping
     public ModelAndView index(){
@@ -36,8 +40,12 @@ public class PacienteController {
     @GetMapping("/novo")
     public ModelAndView novo(){
         var paciente = new PacienteDTO();
+        var listaCidades = cidadeService.getAll();
+        HashMap<String,Object> dados = new HashMap<>();
+        dados.put("paciente",paciente);
+        dados.put("listaCidades",listaCidades);
         return new ModelAndView("paciente/form",
-                    "paciente",paciente);
+                    );
     }
     
     @PostMapping(params="form")
