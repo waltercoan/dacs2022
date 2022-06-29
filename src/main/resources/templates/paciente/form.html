@@ -20,6 +20,9 @@
                             <input class="form-control" 
                                 th:field="*{nome}" 
                                 type="text" id="txtnome">
+                            <p th:if="${#fields.hasErrors('nome')}" 
+                                th:errors="*{nome}"
+                                class="alert alert-danger"/>
                         </div>
                     </div>
                     <div class="row">
@@ -29,6 +32,9 @@
                                 th:field="*{sexo}" 
                                 placeholder="Masculino/Feminino"
                                 type="text" id="txtsexo">
+                            <p th:if="${#fields.hasErrors('sexo')}" 
+                                th:errors="*{sexo}"
+                                class="alert alert-danger"/>
                         </div>
                     </div>
                     <div class="row">
