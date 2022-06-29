@@ -44,8 +44,7 @@ public class PacienteController {
         HashMap<String,Object> dados = new HashMap<>();
         dados.put("paciente",paciente);
         dados.put("listaCidades",listaCidades);
-        return new ModelAndView("paciente/form",
-                    );
+        return new ModelAndView("paciente/form", dados);
     }
     
     @PostMapping(params="form")
