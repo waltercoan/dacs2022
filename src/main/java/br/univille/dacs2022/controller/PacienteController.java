@@ -61,7 +61,13 @@ public class PacienteController {
     @GetMapping(path = "/alterar/{id}")
     public ModelAndView alterar(@PathVariable("id") long id){
         PacienteDTO paciente = service.findById(id);
-        return new ModelAndView("paciente/form","paciente",paciente);
+
+        var listaCidades = cidadeService.getAll();
+        HashMap<String,Object> dados = new HashMap<>();
+        dados.put("paciente",paciente);
+        dados.put("listaCidades",listaCidades);
+
+        return new ModelAndView("paciente/form",dados);
     }
     @GetMapping(path = "/delete/{id}")
     public ModelAndView delete(@PathVariable("id") long id){
