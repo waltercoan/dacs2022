@@ -21,6 +21,14 @@ public class PacienteDTO {
     private String sexo;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
+    private long cidadeId;
+    
+    public long getCidadeId() {
+        return cidadeId;
+    }
+    public void setCidadeId(long cidadeId) {
+        this.cidadeId = cidadeId;
+    }
     private CidadeDTO cidade;
 
     public CidadeDTO getCidade() {
