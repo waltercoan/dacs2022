@@ -60,8 +60,41 @@
                                 class="alert alert-danger"/>
                     </div>
 
+                    <div class="form-group">
+                        <label>Plano de Saude:</label>
+                        <select th:field="*{planoId}"
+                            class="form-select">
+                            <option
+                                th:each="umPlano : ${listaPlanos}"
+                                th:value="${umPlano.id}"
+                                th:text="${umPlano.nome}"></option>
+                            
+                        </select>
+                        <button type="submit" name="incplano" class="btn btn-primary">Incluir Plano</button>
+                    </div>
+                    <div class="form-group">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="umPlano, stat : *{listaPlanos}">
+                                    <td th:text="${umPlano.nome}"></td>
+                                    <input type="hidden" th:field="*{listaPlanos[__${stat.index}__].id}"/>
+                                    <input type="hidden" th:field="*{listaPlanos[__${stat.index}__].nome}"/>
+                                    <td>
+                                        <button type="submit" name="removeitem" th:value="__${stat.index}__" class="btn btn-primary">Remover</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" name="save" class="btn btn-primary">Enviar</button>
             </form>
         </div>
         

@@ -1,6 +1,8 @@
 package br.univille.dacs2022.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -9,6 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import br.univille.dacs2022.entity.PlanoDeSaude;
 
 public class PacienteDTO {
     private long id;
@@ -23,7 +27,21 @@ public class PacienteDTO {
     private Date dataNascimento;
     private long cidadeId;
     private CidadeDTO cidade;
+    private List<PlanoDeSaudeDTO> listaPlanos = new ArrayList<>();
+    private long planoId;
     
+    public long getPlanoId() {
+        return planoId;
+    }
+    public void setPlanoId(long planoId) {
+        this.planoId = planoId;
+    }
+    public List<PlanoDeSaudeDTO> getListaPlanos() {
+        return listaPlanos;
+    }
+    public void setListaPlanos(List<PlanoDeSaudeDTO> listaPlanos) {
+        this.listaPlanos = listaPlanos;
+    }
     public long getCidadeId() {
         return cidadeId;
     }
