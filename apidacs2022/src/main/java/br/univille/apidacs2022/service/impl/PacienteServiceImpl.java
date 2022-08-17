@@ -38,5 +38,10 @@ public class PacienteServiceImpl
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public List<Paciente> getByName(String nome) {
+        return repository.findByNomeIgnoreCaseContaining(nome);
+    }
     
 }

@@ -1,2 +1,26 @@
 GET http://localhost:8081/api/v1/pacientes
 
+###
+GET http://localhost:8081/api/v1/pacientes/nome/ze
+
+###
+
+POST http://localhost:8081/api/v1/pacientes
+content-type: application/json
+
+{
+    "nome": "Zezinho",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-08-17T00:00:00"
+}
+
+###
+
+POST http://localhost:8081/api/v1/pacientes
+content-type: application/json
+
+{
+    "nome": "Mariazinha",
+    "sexo": "Feminino",
+    "dataNascimento": "2022-08-16T00:00:00"
+}
