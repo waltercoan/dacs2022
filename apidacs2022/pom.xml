@@ -18,6 +18,10 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>io.opentracing.contrib</groupId>
+			<artifactId>opentracing-spring-jaeger-cloud-starter</artifactId><version>3.1.2</version>
+		</dependency>
+		<dependency>
 			<groupId>br.univille</groupId>
 			<artifactId>coredacs2022</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
