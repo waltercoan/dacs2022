@@ -1,6 +1,9 @@
 GET http://localhost:8081/api/v1/pacientes
 
 ###
+GET http://localhost:8081/api/v1/pacientes/1
+
+###
 GET http://localhost:8081/api/v1/pacientes/nome/zinha
 
 ###
