@@ -44,13 +44,16 @@ class Apidacs2022ApplicationTests {
 		MvcResult result = 
 		mockMvc.perform(post("/api/v1/pacientes")
 			.content("{\"nome\":\"Zezinho\",\"sexo\":\"Masculino\"}")
+			.header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MTk5NDI5NiwiaWF0IjoxNjYxOTU4Mjk2fQ.O2cR19TAhVQLgenFvjU18zmb_tee-wPqX4524w7ImKA")
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isCreated()).andReturn();
 		
 		String resultStr = result.getResponse().getContentAsString();
 		JSONObject objJson = new JSONObject(resultStr);
 
-		mockMvc.perform(get("/api/v1/pacientes/" + objJson.getString("id")))
+		mockMvc.perform(get("/api/v1/pacientes/" + objJson.getString("id"))
+			.header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MTk5NDI5NiwiaWF0IjoxNjYxOTU4Mjk2fQ.O2cR19TAhVQLgenFvjU18zmb_tee-wPqX4524w7ImKA")
+		)
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.nome", is("Zezinho")))
 			.andExpect(jsonPath("$.sexo", is("Masculino")));
