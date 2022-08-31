@@ -46,7 +46,7 @@ class Apidacs2022ApplicationTests {
 		mockMvc.perform(post("/api/v1/auth/signin")
 			.content("{\"usuario\":\"admin\",\"senha\":\"admin\"}")
 			.contentType(MediaType.APPLICATION_JSON))
-			.andExpect(status().isCreated()).andReturn();
+			.andExpect(status().isOk()).andReturn();
 		String jwtToken = resultAuth.getResponse().getContentAsString();
 
 		MvcResult result = 
