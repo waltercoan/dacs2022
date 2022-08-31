@@ -1,5 +1,15 @@
-GET http://localhost:8081/api/v1/pacientes
+POST http://localhost:8081/api/v1/auth/signin
+content-type: application/json
 
+{
+    "usuario": "admin",
+    "senha": "admin"
+}
+
+###
+
+GET http://localhost:8081/api/v1/pacientes
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MTk4OTkyNCwiaWF0IjoxNjYxOTUzOTI0fQ.jPDB1O4jezDcjP7A1qrdf0m02mC8fsccP2nkMxSx5gk
 ###
 GET http://localhost:8081/api/v1/pacientes/1
 
@@ -58,3 +68,4 @@ content-type: application/json
 ###
 
 DELETE http://localhost:8081/api/v1/pacientes/33
+
