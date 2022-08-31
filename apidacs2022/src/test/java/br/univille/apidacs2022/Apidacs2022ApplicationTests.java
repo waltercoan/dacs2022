@@ -41,10 +41,18 @@ class Apidacs2022ApplicationTests {
 	}
 	@Test
 	void pacienteControllerAPIPOSTGETTest() throws Exception{
+
+		MvcResult resultAuth = 
+		mockMvc.perform(post("/api/v1/auth/signin")
+			.content("{\"usuario\":\"admin\",\"senha\":\"admin\"}")
+			.contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isCreated()).andReturn();
+		String jwtToken = resultAuth.getResponse().getContentAsString();
+
 		MvcResult result = 
 		mockMvc.perform(post("/api/v1/pacientes")
 			.content("{\"nome\":\"Zezinho\",\"sexo\":\"Masculino\"}")
-			.header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MTk5NDI5NiwiaWF0IjoxNjYxOTU4Mjk2fQ.O2cR19TAhVQLgenFvjU18zmb_tee-wPqX4524w7ImKA")
+			.header("Authorization", "Bearer " + jwtToken)
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isCreated()).andReturn();
 		
@@ -52,7 +60,7 @@ class Apidacs2022ApplicationTests {
 		JSONObject objJson = new JSONObject(resultStr);
 
 		mockMvc.perform(get("/api/v1/pacientes/" + objJson.getString("id"))
-			.header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2MTk5NDI5NiwiaWF0IjoxNjYxOTU4Mjk2fQ.O2cR19TAhVQLgenFvjU18zmb_tee-wPqX4524w7ImKA")
+			.header("Authorization", "Bearer " + jwtToken)
 		)
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.nome", is("Zezinho")))
