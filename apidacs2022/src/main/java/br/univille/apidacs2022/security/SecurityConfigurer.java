@@ -9,13 +9,23 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
+    
+    @Autowired
+    private JWTRequestFilter jwtRequestFilter;
 
     /*Usar este codigo enquanto nao concluir JWT */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-            .antMatchers("/api/v1/auth/signin","/swagger-ui.html","/v2/api-docs/**","/swagger-resources/**").permitAll();
-         
+            .antMatchers("/api/v1/auth/signin","/swagger-ui.html","/v2/api-docs/**","/swagger-resources/**").permitAll()
+            .antMatchers("/api/**").authenticated()
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        
+        http.addFilterBefore(jwtRequestFilter,
+                UsernamePasswordAuthenticationFilter.class);
+        
     }
 }

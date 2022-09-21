@@ -41,16 +41,26 @@ class Apidacs2022ApplicationTests {
 	}
 	@Test
 	void pacienteControllerAPIPOSTGETTest() throws Exception{
+		MvcResult resultAuth = 
+		mockMvc.perform(post("/api/v1/auth/signin")
+			.content("{\"usuario\":\"admin\",\"senha\":\"admin\"}")
+			.contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk()).andReturn();
+		String jwtToken = resultAuth.getResponse().getContentAsString();
+		
 		MvcResult result = 
 		mockMvc.perform(post("/api/v1/pacientes")
 			.content("{\"nome\":\"Zezinho\",\"sexo\":\"Masculino\"}")
+			.header("Authorization", "Bearer " + jwtToken)
 			.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isCreated()).andReturn();
 		
 		String resultStr = result.getResponse().getContentAsString();
 		JSONObject objJson = new JSONObject(resultStr);
 
-		mockMvc.perform(get("/api/v1/pacientes/" + objJson.getString("id")))
+		mockMvc.perform(get("/api/v1/pacientes/" + objJson.getString("id"))
+			.header("Authorization", "Bearer " + jwtToken)
+		)
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.nome", is("Zezinho")))
 			.andExpect(jsonPath("$.sexo", is("Masculino")));
