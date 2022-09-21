@@ -15,7 +15,7 @@ public class Startup {
 
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event){
-        if(repository.findByUsuario("admin").isEmpty()){
+        if(!repository.findByUsuario("admin").isPresent()){
             var adminUser = new Usuario();
             adminUser.setUsuario("admin");
             adminUser.setSenha("admin");
