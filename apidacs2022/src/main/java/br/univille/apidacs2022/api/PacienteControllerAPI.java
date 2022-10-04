@@ -35,6 +35,14 @@ public class PacienteControllerAPI {
             ResponseEntity<List<Paciente>>
                 (listaPacientes,HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Paciente> 
+            getById(@PathVariable("id") long id){
+        
+        var paciente = service.findById(id);
+        return new ResponseEntity<Paciente>
+                (paciente,HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<Paciente> 
