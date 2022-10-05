@@ -14,10 +14,10 @@ public class JaegerConfig {
     @Bean
     public JaegerTracer jaegerTracer(){
         return new io.jaegertracing.Configuration("dacsapi-waltercoan")
-            //.withSampler(new SamplerConfiguration().withType(ConstSampler.TYPE)
+            .withSampler(new SamplerConfiguration().withType(ConstSampler.TYPE)
+            .withParam(1)) //10 Traces por segundo
+            //.withSampler(new SamplerConfiguration().withType(RateLimitingSampler.TYPE)
             //.withParam(10)) //10 Traces por segundo
-            .withSampler(new SamplerConfiguration().withType(RateLimitingSampler.TYPE)
-            .withParam(10)) //10 Traces por segundo
             .withReporter(new ReporterConfiguration().withLogSpans(true))
             .getTracer();
     }
