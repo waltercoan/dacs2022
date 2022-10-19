@@ -1,0 +1,41 @@
+version: '3'
+services:
+  webapidacs:
+    image: dacs2022_buildwebapidacs:latest
+    ports:
+     - "8081:8081"
+    depends_on:
+      - "db"
+    environment:
+       - DB_HOST=db
+       - DB_USER=root
+       - DB_PASSWORD=root
+       - DB_NAME=dacs2022
+       - SPRING_PROFILES_ACTIVE=prod
+#  buildwebapidacs:
+#    build: 
+#      context: .
+#      dockerfile: ./Dockerfile
+#    container_name: prodapidacs2022
+#    ports:
+#     - "8081:8081"
+#    depends_on:
+#      - "db"
+#    environment:
+#       - DB_HOST=db:3306
+#       - DB_USER=root
+#       - DB_PASSWORD=root
+#       - DB_NAME=dacs2022
+#       - SPRING_PROFILES_ACTIVE=prod
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+        MYSQL_DATABASE: 'dacs2022'
+        MYSQL_USER: 'admin'
+        MYSQL_PASSWORD: 'root'
+        MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+        - '3306:3306'
+    expose:
+        - '3306'     
