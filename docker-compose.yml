@@ -1,6 +1,6 @@
 version: '3'
 services:
-  dbwalter:
+  db:
     image: mysql:5.7
     restart: always
     environment:
@@ -8,16 +8,18 @@ services:
       MYSQL_USER: 'admin'
       MYSQL_PASSWORD: 'root'
       MYSQL_ROOT_PASSWORD: 'root'
-#    ports:
-#     - '3306:3306'
+    ports:
+        - '3306:3306'
+    expose:
+        - '3306'
   webdacswalter:
     image: walterdacs2022:latest
     depends_on:
-      - "dbwalter"
+      - "db"
     ports:
       - "8081:8081"
     environment:
-      - DB_HOST=dbwalter
+      - DB_HOST=db
       - DB_USER=root
       - DB_PASSWORD=root
       - DB_NAME=dacs2022
