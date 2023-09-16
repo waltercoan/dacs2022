@@ -1,0 +1,42 @@
+name: Trigger auto deployment for mycontapp
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/mycontapp-AutoDeployTrigger-19c9eb3a-8de2-4d0e-9f25-f04c67cf045a.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.MYCONTAPP_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: ca60f578de8bacr.azurecr.io
+          registryUsername: ${{ secrets.MYCONTAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.MYCONTAPP_REGISTRY_PASSWORD }}
+          containerAppName: mycontapp
+          resourceGroup: waltercoan_rg_8846
+          imageToBuild: ca60f578de8bacr.azurecr.io/mycontapp:${{ github.sha }}
+          
+
+     
+
